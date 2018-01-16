@@ -9,4 +9,4 @@ cd nginx
 sh generate-nginx.sh
 cd ..
 sh generate-compose.sh
-docker-compose -d up
+docker-compose up
