@@ -1,8 +1,8 @@
 #! /bin/sh
 cd varnish
-mkdir pw
-mkdir sql
-mkdir db
+mkdir -p pw
+mkdir -p sql
+mkdir -p db
 sh generate-varnish.sh
 cd ..
 cd nginx
