@@ -11,7 +11,7 @@ services:
         environment:
             - VCL_CONFIG=/data/generated.vcl
         volumes:
-            - ./varnish/vcl:/data
+            - $PWD/varnish/vcl:/data
         links:
 :EOF:
 for site in `ls sites`
@@ -27,13 +27,13 @@ cat >> docker-compose.yml <<:EOF:
             - mariadb
             - php-$SITENAME:php
         volumes:
-            - ./sites/$site:/var/www/$site
-            - ./nginx-base-conf:/etc/nginx/
-            - ./nginx/non-ssl:/etc/nginx/conf.d
+            - $PWD/sites/$site:/var/www/$site
+            - $PWD/nginx-base-conf:/etc/nginx/
+            - $PWD/nginx/non-ssl:/etc/nginx/conf.d
     php-$SITENAME:
         image: php:7-fpm
         volumes:
-            - ./sites/$site:/var/www/$site
+            - $PWD/sites/$site:/var/www/$site
 :EOF:
 
 done
@@ -43,13 +43,13 @@ cat >> docker-compose.yml << :EOF:
         ports:
             - 443:443
         volumes:
-            - ./nginx/ssl:/etc/nginx/conf.d
+            - $PWD/nginx/ssl:/etc/nginx/conf.d
         links:
             - varnish
     mariadb:
         image: mariadb
         volumes:
-            - ./db:/var/lib/mysql
+            - $PWD/db:/var/lib/mysql
         env_file:
-            - ./pw/mysql
+            - $PWD/pw/mysql
 :EOF:
