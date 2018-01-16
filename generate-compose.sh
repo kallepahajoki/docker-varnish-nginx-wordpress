@@ -1,3 +1,7 @@
+#! /bin/bash
+
+cat > docker-compose.yml <<:EOF:
+
 version: '2'
 services:
   varnish:
@@ -9,24 +13,32 @@ services:
     volumes:
       - ./varnish/vcl:/data
     links:
-      - frugalistfi
+:EOF:
+for site in `ls sites`
+do
+    SITENAME="`echo $site|tr -d .`"
+cat >> docker-compose.yml <<:EOF:
+        - $SITENAME
+   $SITENAME:
 
-  frugalistfi:
     ports:
       - 8080:8080
     image: nginx:1.13.6
     links:
 #      - mariadb
-      - php-kp:php
+      - php-$SITENAME:php
     volumes:
-        - ./sites/frugalist.fi:/var/www/frugalist.fi
+        - ./sites/$site:/var/www/$site
         - ./nginx-base-conf:/etc/nginx/
         - ./nginx/non-ssl:/etc/nginx/conf.d
-  php-kp:
+  php-$SITENAME:
     image: php:7-fpm
     volumes:
-        - ./sites/frugalist.fi:/var/www/frugalist.fi
+        - ./sites/$site:/var/www/$site
+:EOF:
 
+done
+cat >> docker-compose.yml << :EOF:
   ssl-terminate:
     image: nginx:1.13.6
     ports:
@@ -41,3 +53,5 @@ services:
       - ./db:/var/lib/mysql
     env_file:
       - ./pw/mysql
+
+:EOF:
