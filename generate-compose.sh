@@ -44,6 +44,7 @@ cat >> docker-compose.yml << :EOF:
             - 443:443
         volumes:
             - $PWD/nginx/ssl:/etc/nginx/conf.d
+            - /etc/letsencrypt:/etc/letsencrypt
         links:
             - varnish
     mariadb:
