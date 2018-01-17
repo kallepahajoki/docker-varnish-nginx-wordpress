@@ -8,11 +8,11 @@ do
 
   server {
         listen *:443 ssl;
-        ssl off;
+        ssl on;
 	server_name  www.$site;
 
-#	ssl_certificate /etc/letsencrypt/live/www.$site/fullchain.pem;
-#	ssl_certificate_key /etc/letsencrypt/live/www.$site/privkey.pem;
+	ssl_certificate /etc/letsencrypt/live/www.$site/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/www.$site/privkey.pem;
 location / {
     proxy_pass            http://varnish:8001;
     proxy_read_timeout    90;
@@ -30,11 +30,11 @@ location / {
 }
   server {
         listen *:443 ssl;
-        ssl off;
+        ssl on;
 	server_name $site;
 
-#	ssl_certificate /etc/letsencrypt/live/$site/fullchain.pem;
-#	ssl_certificate_key /etc/letsencrypt/live/$site/privkey.pem;
+	ssl_certificate /etc/letsencrypt/live/$site/fullchain.pem;
+	ssl_certificate_key /etc/letsencrypt/live/$site/privkey.pem;
 location / {
     proxy_pass            http://varnish:8001;
     proxy_read_timeout    90;
