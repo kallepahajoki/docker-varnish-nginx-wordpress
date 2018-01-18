@@ -14,7 +14,7 @@ do
 	ssl_certificate /etc/letsencrypt/live/www.$site/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/www.$site/privkey.pem;
 location / {
-    proxy_pass            http://varnish:8001;
+    proxy_pass            http://varnish:80;
     proxy_read_timeout    90;
     proxy_connect_timeout 90;
     proxy_redirect        off;
@@ -36,7 +36,7 @@ location / {
 	ssl_certificate /etc/letsencrypt/live/$site/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/$site/privkey.pem;
 location / {
-    proxy_pass            http://varnish:8001;
+    proxy_pass            http://varnish:80;
     proxy_read_timeout    90;
     proxy_connect_timeout 90;
     proxy_redirect        off;
