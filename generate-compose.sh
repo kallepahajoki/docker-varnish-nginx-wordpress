@@ -30,11 +30,11 @@ cat >> docker-compose.yml <<:EOF:
             - $PWD/sites/$site:/var/www/$site
             - $PWD/nginx-base-conf:/etc/nginx/
             - $PWD/nginx/non-ssl:/etc/nginx/conf.d
-            - $PWD/nginx/php-fpm.conf:/etc/php-fpm/php-fpm.conf
     php-$SITENAME:
         image: php:7-fpm
         volumes:
             - $PWD/sites/$site:/var/www/$site
+            - $PWD/nginx/php-fpm.conf:/etc/php-fpm/php-fpm.conf
         environment:
             - TIMEZONE=Europe/Helsinki
 :EOF:
