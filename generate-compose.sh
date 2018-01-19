@@ -36,10 +36,10 @@ cat >> docker-compose.yml <<:EOF:
             - $PWD/nginx-base-conf:/etc/nginx/
             - $PWD/nginx/non-ssl:/etc/nginx/conf.d
     php-$SITENAME:
-        image: php:7-fpm
+        image: php-mod
         volumes:
             - $PWD/sites/$site:/var/www/$site
-            - $PWD/php/php-fpm.conf:/usr/local/etc/php-fpm.d/logging.conf
+            - $PWD/php/logging.conf:/usr/local/etc/php-fpm.d/logging.conf
             - $PWD/php/php.ini:/usr/local/etc/php/php.ini
         environment:
             - TIMEZONE=Europe/Helsinki
