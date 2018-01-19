@@ -39,8 +39,8 @@ cat >> docker-compose.yml <<:EOF:
         image: php:7-fpm
         volumes:
             - $PWD/sites/$site:/var/www/$site
-            - $PWD/nginx/php-fpm.conf:/usr/local/etc/php-fpm.d/logging.conf
-            - $PWD/nginx/php.ini:/usr/local/etc/php/php.ini
+            - $PWD/php/php-fpm.conf:/usr/local/etc/php-fpm.d/logging.conf
+            - $PWD/php/php.ini:/usr/local/etc/php/php.ini
         environment:
             - TIMEZONE=Europe/Helsinki
 :EOF:
