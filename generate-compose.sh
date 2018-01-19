@@ -41,6 +41,8 @@ cat >> docker-compose.yml <<:EOF:
             - $PWD/sites/$site:/var/www/$site
             - $PWD/php/logging.conf:/usr/local/etc/php-fpm.d/logging.conf
             - $PWD/php/php.ini:/usr/local/etc/php/php.ini
+        links:
+            - mariadb
         environment:
             - TIMEZONE=Europe/Helsinki
 :EOF:
