@@ -32,7 +32,7 @@ do
 
     cat > vcl/recv.vcl << :EOF:
 
-        if (req.http.host ~ "^(.*\.)?${site}\$") {
+        if (req.http.host ~ "^(.*.)?${site}\$") {
             set req.backend_hint = $SITENAME;
         }
 
