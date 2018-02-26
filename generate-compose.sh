@@ -25,8 +25,6 @@ do
     SITENAME="`echo $site|tr -d .`"
 cat >> docker-compose.yml <<:EOF:
     $SITENAME:
-        ports:
-            - 8080:8080
         image: nginx:1.13.6
         links:
             - mariadb

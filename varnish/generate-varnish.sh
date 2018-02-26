@@ -17,7 +17,6 @@ echo > vcl/backends.vcl
 for site in `ls ../sites`
 do
     SITENAME="`echo $site|tr -d .`"
-    #echo "include \"/data/$site.vcl\";" >> vcl/generated.vcl
 
     cat >> vcl/backends.vcl << :EOF:
 
@@ -34,7 +33,7 @@ do
 
     cat >> vcl/recv.vcl << :EOF:
 
-        if (req.http.host ~ "^(.*.)?${site}\$") {
+        if (req.http.host ~ "^(.*\.)?${site}\$") {
             set req.backend_hint = $SITENAME;
         }
 
