@@ -16,22 +16,28 @@ echo "include \"/data/header.vcl\";" >> vcl/generated.vcl
 for site in `ls ../sites`
 do
     SITENAME="`echo $site|tr -d .`"
-    echo "include \"/data/$site.vcl\";" >> vcl/generated.vcl
+    #echo "include \"/data/$site.vcl\";" >> vcl/generated.vcl
 
-    cat > vcl/$site.vcl << :EOF:
+    cat >> vcl/generated.vcl << :EOF:
 
     backend $SITENAME {
         .host = "$SITENAME";
         .port = "8080";
     }
+:EOF:
+done
+echo '     sub vcl_recv {' >> vcl/generated.vcl
+for site in `ls ../sites`
+do
 
-    sub vcl_recv {
+    cat >> vcl/$site.recv.vcl << :EOF:
+
         if (req.http.host ~ "^(.*\.)\?${site}\$") {
             set req.backend_hint = $SITENAME;
         }
 
-        return(hash);
-    }
 :EOF:
+echo '        return(hash);' >> vcl/generated.vcl
+echo '}' >> vcl/generated.vcl
 
 done
