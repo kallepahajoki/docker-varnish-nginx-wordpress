@@ -63,7 +63,7 @@ server {
         root /var/www/$site;
         index index.php index.html index.htm;
 
-        server_name $site;
+        server_name ^(.*\.)?${site}$;
 
         error_page 404 /404.html;
         error_page 500 502 503 504 /50x.html;
