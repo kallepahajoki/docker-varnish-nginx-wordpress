@@ -29,6 +29,7 @@ done
 echo '     sub vcl_recv {' >> vcl/generated.vcl
 for site in `ls ../sites`
 do
+    SITENAME="`echo $site|tr -d .`"
 
     cat >> vcl/generated.vcl << :EOF:
 
