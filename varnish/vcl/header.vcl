@@ -30,6 +30,7 @@ sub vcl_recv {
         }
     }
 
+    include "/data/recv.vcl";
     ###
     	### Allow purging
     	###

@@ -26,12 +26,11 @@ do
     }
 :EOF:
 done
-echo '     sub vcl_recv {' >> vcl/generated.vcl
 for site in `ls ../sites`
 do
     SITENAME="`echo $site|tr -d .`"
 
-    cat >> vcl/generated.vcl << :EOF:
+    cat >> vcl/recv.vcl << :EOF:
 
         if (req.http.host ~ "^(.*\.)\?${site}\$") {
             set req.backend_hint = $SITENAME;
@@ -39,6 +38,4 @@ do
 
 :EOF:
 done
-echo '        return(hash);' >> vcl/generated.vcl
-echo '}' >> vcl/generated.vcl
 
