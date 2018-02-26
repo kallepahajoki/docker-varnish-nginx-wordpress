@@ -37,7 +37,7 @@ do
         }
 
 :EOF:
+done
 echo '        return(hash);' >> vcl/generated.vcl
 echo '}' >> vcl/generated.vcl
 
-done
