@@ -11,6 +11,7 @@ acl aclBanned {
 	"81.82.83.84";
 	"31.5.89.4";
 }
+include "/data/backends.vcl";
 
 sub vcl_recv {
     if ( req.http.cookie ~ "wordpress_logged_in" ) {

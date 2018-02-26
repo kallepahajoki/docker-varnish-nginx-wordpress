@@ -18,7 +18,7 @@ do
     SITENAME="`echo $site|tr -d .`"
     #echo "include \"/data/$site.vcl\";" >> vcl/generated.vcl
 
-    cat >> vcl/generated.vcl << :EOF:
+    cat >> vcl/backends.vcl << :EOF:
 
     backend $SITENAME {
         .host = "$SITENAME";
