@@ -30,7 +30,7 @@ echo '     sub vcl_recv {' >> vcl/generated.vcl
 for site in `ls ../sites`
 do
 
-    cat >> vcl/$site.recv.vcl << :EOF:
+    cat >> vcl/generated.vcl << :EOF:
 
         if (req.http.host ~ "^(.*\.)\?${site}\$") {
             set req.backend_hint = $SITENAME;
