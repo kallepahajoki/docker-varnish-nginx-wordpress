@@ -16,6 +16,7 @@ services:
         image: mariadb
         volumes:
             - $PWD/db:/var/lib/mysql
+            - $PWD/sql:/sql
         env_file:
             - $PWD/pw/mysql
 :EOF:
